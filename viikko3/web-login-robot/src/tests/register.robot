@@ -30,7 +30,32 @@ Register With Nonmatching Password And Password Confirmation
     Set Username  jenni
     Set Password  koodari00
     Set Password Confirmation  00koodari
+    Submit Credentials
+    Registration Should Fail With Message  Passwords don't match
 
+Login After Successful Registration
+    Set Username  jenni
+    Set Password  koodari11
+    Set Password Confirmation  koodari11
+    Submit Credentials
+    Registration Should Succeed
+    Go To Login Page
+    Set Username  jenni
+    Set Password  koodari11
+    Submit Login  
+    Login Should Succeed    
+
+Login After Failed Registration
+    Set Username  jenni
+    Set Password  koodari11
+    Set Password Confirmation  kood
+    Submit Credentials
+    Registration Should Fail With Message  Passwords don't match
+    Go To Login Page
+    Set Username  jenni
+    Set Password  koodari11
+    Submit Login
+    Login Should Fail With Message  Invalid username or password
 
 
 
@@ -59,3 +84,16 @@ Set Password Confirmation
 
 Submit Credentials
     Click Button  Register
+
+Submit Login
+    Click Button  Login
+
+Login Should Succeed
+    Main Page Should Be Open
+
+Login Should Fail With Message
+    [Arguments]  ${message}
+    Login Page Should Be Open
+    Page Should Contain  ${message}
+
+
