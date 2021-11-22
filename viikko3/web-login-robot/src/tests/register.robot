@@ -16,7 +16,7 @@ Register With Too Short Username And Valid Password
     Set Username  q
     Set Password  jenni000
     Set Password Confirmation  jenni000
-    Submit Credentials
+    Submit Credentials  
     Registration Should Fail With Message  Username Too Short
 
 
