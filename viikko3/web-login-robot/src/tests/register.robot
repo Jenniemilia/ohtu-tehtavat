@@ -17,7 +17,21 @@ Register With Too Short Username And Valid Password
     Set Password  jenni000
     Set Password Confirmation  jenni000
     Submit Credentials  
-    Registration Should Fail With Message  Username Too Short
+    Registration Should Fail With Message  Username too short
+
+Register With Valid Username And Too Short Password
+    Set Username  jenni
+    Set Password  koodi
+    Set Password Confirmation  koodi
+    Submit Credentials
+    Registration Should Fail With Message  Password too short
+
+Register With Nonmatching Password And Password Confirmation
+    Set Username  jenni
+    Set Password  koodari00
+    Set Password Confirmation  00koodari
+
+
 
 
 *** Keywords ***
@@ -40,7 +54,7 @@ Set Password
 
 Set Password Confirmation
     [Arguments]  ${password}
-    Input Password  password  ${password}
+    Input Password  password_confirmation  ${password}
 
 
 Submit Credentials
