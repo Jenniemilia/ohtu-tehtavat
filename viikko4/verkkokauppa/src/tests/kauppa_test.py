@@ -68,17 +68,52 @@ class TestKauppa(unittest.TestCase):
         self.pankki_mock.tilisiirto.assert_called_with("pekka", 42, "12345", ANY, 9)
 
     def test_lisataan_koriin_useampi_sama_tuote(self):
-            self.kauppa.aloita_asiointi()
-            self.kauppa.lisaa_koriin(2)
-            self.kauppa.lisaa_koriin(2)
-            self.kauppa.tilimaksu("pekka", "12345")
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(2)
+        self.kauppa.lisaa_koriin(2)
+        self.kauppa.tilimaksu("pekka", "12345")
 
-            self.pankki_mock.tilisiirto.assert_called_with("pekka", 42, "12345", ANY, 8)
+        self.pankki_mock.tilisiirto.assert_called_with("pekka", 42, "12345", ANY, 8)
 
     def test_lisataan_koriin_useampi_tuote_joista_jokin_on_loppu(self):
-            self.kauppa.aloita_asiointi()
-            self.kauppa.lisaa_koriin(2)
-            self.kauppa.lisaa_koriin(3)
-            self.kauppa.tilimaksu("pekka", "12345")
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(2)
+        self.kauppa.lisaa_koriin(3)
+        self.kauppa.tilimaksu("pekka", "12345")
 
-            self.pankki_mock.tilisiirto.assert_called_with("pekka", 42, "12345", ANY, 4)
+        self.pankki_mock.tilisiirto.assert_called_with("pekka", 42, "12345", ANY, 4)
+
+    def test_aloita_asiointi_nollaa_edelliset_ostokset(self):
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(2)
+        self.kauppa.tilimaksu("pekka", "12345")
+
+        self.pankki_mock.tilisiirto.assert_called_with("pekka", 42, "12345", ANY, 4)
+
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(3)
+        self.kauppa.tilimaksu("pekka", "12345")
+
+        self.pankki_mock.tilisiirto.assert_called_with("pekka", 42, "12345", ANY, 0)
+
+    
+    def test_tarkista_etta_uusi_viitenumero_jokaiselle_tapahtumalle(self):
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(2)
+        self.kauppa.tilimaksu("pekka", "12345")
+
+        self.assertEqual(self.viitegeneraattori_mock.uusi.call_count, 1)
+
+        self.viitegeneraattori_mock.uusi.return_value = 33
+
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(1)
+        self.kauppa.tilimaksu("pekka", "12345")
+
+        self.assertEqual(self.viitegeneraattori_mock.uusi.call_count, 2)
+
+    def test_hae_tuote_ja_palauta_se_takaisin_varastoon(self):
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(1)
+        self.kauppa.poista_korista(1)
+        self.varasto_mock.saldo.side_effect = 10
