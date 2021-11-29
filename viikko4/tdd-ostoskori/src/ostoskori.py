@@ -7,7 +7,7 @@ class Ostoskori:
         # ostoskori tallettaa Ostos-oliota, yhden per korissa oleva Tuote
 
     def tavaroita_korissa(self):
-        maara = 2
+        maara = 0
         
 
         return maara
