@@ -4,9 +4,9 @@ from tennis_game import TennisGame
 
 test_cases = [
     (0, 0, "Love-Love"),
-    (1, 1, "Fifteen-Love"),
-    (2, 2, "Thirty-Love"),
-    (3, 3, "Forty-Love"),
+    (1, 1, "Fifteen-Fifteen"),
+    (2, 2, "Thirty-Thirty"),
+    (3, 3, "Forty-Forty"),
     (4, 4, "Deuce"),
 
     (1, 0, "Fifteen-Love"),

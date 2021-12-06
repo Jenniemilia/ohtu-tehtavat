@@ -29,8 +29,8 @@ class TennisGame:
 
     def advantage(self):
         if self.player1_score > self.player2_score:
-            return f"Advantage for {self.player1_name}"
-        return f"Advantage for {self.player2_name}"
+            return f"Advantage {self.player1_name}"
+        return f"Advantage {self.player2_name}"
 
     def winner(self):
         if self.player1_score > self.player2_score:
