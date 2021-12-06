@@ -41,14 +41,14 @@ class Ostoskori:
 
     def poista_tuote(self, poistettava: Tuote):
         # poistaa tuotteen
-        pass
+        self.ostokset[poistettava.nimi()].muuta_lukumaaraa(-1)
+
 
     def tyhjenna(self):
         self.ostokset.clear()
         # tyhjentää ostoskorin
 
     def ostokset(self):
-
         return list(self.ostokset.values())
         # palauttaa listan jossa on korissa olevat ostos-oliot
         # kukin ostos-olio siis kertoo mistä tuotteesta on kyse JA kuinka monta kappaletta kyseistä tuotetta korissa on
