@@ -66,7 +66,6 @@ class Kayttoliittyma:
 
     def _suorita_komento(self, komento):
         if komento == Komento.KUMOA:
-            self.komento_olio = None
             self.komento_olio.palauta()
         else:
             self.komento_olio = self._komennot[komento]
