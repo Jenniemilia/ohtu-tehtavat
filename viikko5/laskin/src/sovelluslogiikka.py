@@ -3,13 +3,13 @@ class Sovelluslogiikka:
         self.tulos = tulos
 
     def miinus(self, arvo):
-        self.tulos = self.tulos - arvo
+        self.tulos = self.tulos - int(arvo)
 
     def plus(self, arvo):
-        self.tulos = self.tulos + arvo
+        self.tulos = self.tulos + int(arvo)
 
     def nollaa(self):
         self.tulos = 0
 
     def aseta_arvo(self, arvo):
-        self.tulos = arvo
+        self.tulos = int(arvo)
