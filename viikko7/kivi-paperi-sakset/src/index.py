@@ -1,6 +1,6 @@
 from kps_pelaaja_vs_pelaaja import KPSPelaajaVsPelaaja
 from kps_tekoaly import KPSTekoaly
-from kps_parempi_tekoaly import KPSParempiTekoaly
+from tekoaly_parannettu import TekoalyParannettu
 
 
 def main():
@@ -33,7 +33,7 @@ def main():
                 "Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s"
             )
 
-            haastava_yksinpeli = KPSParempiTekoaly()
+            haastava_yksinpeli = KPSTekoaly(TekoalyParannettu(50))
             haastava_yksinpeli.pelaa()
         else:
             break
